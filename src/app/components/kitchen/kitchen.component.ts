@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Order } from '../../model/order';
 import { OrderService } from '../../services/order.service';
 import { OrderComponent } from '../order/order.component';
@@ -10,25 +10,11 @@ import { OrderComponent } from '../order/order.component';
   templateUrl: './kitchen.component.html',
   styleUrl: './kitchen.component.css'
 })
-export class KitchenComponent implements OnInit, OnDestroy{
+export class KitchenComponent {
 
   orders : Order[]
 
-  dateTime: Date;
-  private timer: any;
-
-  constructor(private orderService : OrderService) {
-    this.dateTime = new Date();
+  constructor(private orderService : OrderService) { 
     this.orders = orderService.getOrders()
-  }
-  ngOnInit(): void {
-    this.timer = setInterval(() => {
-      this.dateTime = new Date();
-    },1000);
-  }
-  ngOnDestroy(): void {
-    if (this.timer) {
-      clearInterval(this.timer);
-    }
   }
 }
