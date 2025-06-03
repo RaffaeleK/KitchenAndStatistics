@@ -7,18 +7,20 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
   templateUrl: './kitchen.component.html',
   styleUrl: './kitchen.component.css'
 })
-export class KitchenComponent /* implements OnInit, OnDestroy */ {
+export class KitchenComponent implements OnInit, OnDestroy{
   dateTime: Date;
-
+  private timer: any;
   constructor() {
     this.dateTime = new Date();
   }
-  // ngOnInit(): void {
-  //   this.dateTime = setInterval(() => {
-  //     this.dateTime = new Date().;
-  //   }
-  // }
-  // ngOnDestroy(): void {
-  //   throw new Error('Method not implemented.');
-  // }
+  ngOnInit(): void {
+    this.timer = setInterval(() => {
+      this.dateTime = new Date();
+    },1000);
+  }
+  ngOnDestroy(): void {
+    if (this.timer) {
+      clearInterval(this.timer);
+    }
+  }
 }
