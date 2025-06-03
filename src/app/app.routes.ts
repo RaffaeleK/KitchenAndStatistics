@@ -4,7 +4,7 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
 import { LoginComponent } from './components/login/login.component';
 
 export const routes: Routes = [
-    {path: 'kitchen', component:KitchenComponent},
+    {path: '', component:KitchenComponent},
     {path: 'stats', component: StatisticsComponent},
     {path: '**', component: LoginComponent}
 ];

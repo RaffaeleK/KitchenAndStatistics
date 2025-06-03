@@ -1,1 +1,5 @@
-<p>kitchen works!</p>
+<div class="d-flex justify-content-center">
+    @for (order of orders; track order) {
+        <app-order [order]="order"></app-order>
+    }
+</div>

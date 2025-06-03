@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { OrderService } from '../../services/order.service';
+import { Order } from '../../model/order';
 
 @Component({
   selector: 'app-order',
@@ -8,4 +10,5 @@ import { Component } from '@angular/core';
 })
 export class OrderComponent {
 
+  @Input() order!: Order;
 }

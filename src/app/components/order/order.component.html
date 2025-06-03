@@ -1,1 +1,13 @@
-<p>order works!</p>
+<div class="card" style="width: 18rem;">
+    <div class="d-flex justify-content-evenly py-2">
+        <p>Order ID: {{order.id}} </p>
+        <p>Order Time: {{order.orderDate?.getHours()}}:{{order.orderDate?.getMinutes()?.toString()?.padStart(2, "0")}}</p>
+    </div>
+    <hr class="my-2 border-primary">
+    <div class="card-body">
+        <h4>Table: {{order.tableId}}</h4> 
+        <h5 class="card-title">Product name: {{order.name}}</h5>
+        <h5 class="card-title">Quantity: {{order.qty}}</h5>
+        <a class="btn btn-primary">Sign as completed</a>
+    </div>
+</div>
