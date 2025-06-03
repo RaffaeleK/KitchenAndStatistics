@@ -10,5 +10,5 @@ import { Order } from '../../model/order';
 })
 export class OrderComponent {
 
-  @Input() order!: Order;
+  @Input() order!: Order;  
 }
