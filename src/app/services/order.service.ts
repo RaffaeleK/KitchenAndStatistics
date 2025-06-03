@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Order } from '../model/order';
+import { map, Observable } from 'rxjs';
+import { environment } from '../../enviroments/enviromennt';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -15,13 +18,29 @@ export class OrderService {
     }
   ]
   
-  constructor()
+  constructor(private http: HttpClient)
   {
 
   }
 
-  getOrders() {
-    return this.orders
+  getOrdersById(id: number):Observable<any>{
+    return this.http.get<Order[]>(environment.apiKitchen + 'kitchen/'+id+'/order').pipe(
+      map(data => data.map(item => ({
+        id: item.id,
+        productId: item.productId,
+        tableId: item.tableId,
+        name: item.name,
+        qty: item.qty,
+        price: item.price,
+        orderDate:  <Date>(item.orderDate),
+        completionDate: null
+      })))
+    )
+   
+  }
+
+  orderDone(id: number, orderId: number){
+    this.http.post(environment.apiKitchen + 'kitchen/'+id+'/order', `[{"id": ${orderId}}]`)
   }
 
 
