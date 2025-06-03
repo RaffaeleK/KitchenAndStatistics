@@ -14,12 +14,15 @@ import { FormsModule } from '@angular/forms';
 })
 export class KitchenComponent {
 
-  orders : Order[]
+  //const INITIALID = 1
+  //orders : Order[]
   orderTypeFilter? : orderType[]
   types? : orderType[]
 
   constructor(private orderService : OrderService) { 
-    this.orders = orderService.getOrders()
+
+    /*for(i = 1; i <= orderService.)
+    this.orders = orderService.getOrders()*/
   }
 
   applyFilter()
