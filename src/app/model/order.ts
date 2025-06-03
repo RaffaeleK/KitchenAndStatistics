@@ -1,11 +1,16 @@
-export class Order
+export class orderType
 {
-    id?: number
+    id? : number
+    name? : string
+}
+
+export class Order extends orderType
+{
     productId?: number
     tableId?: number
-    name?: string
     qty?: number
     price?: number
     orderDate?: Date
     completionDate?: Date
+    orderType? : orderType
 }
