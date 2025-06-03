@@ -1,1 +1,3 @@
-<router-outlet></router-outlet>
+<!--<app-kitchen *ngIf="this.authservice.isLogged()"></app-kitchen>-->
+<app-login *ngIf="!this.authservice.isLogged()"></app-login>
+<router-outlet *ngIf="this.authservice.isLogged()"/>
