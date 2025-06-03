@@ -1,0 +1,59 @@
+html{
+    font-size: 20px;
+}
+
+h2{
+    margin: 1rem 2.2rem;
+}
+
+.clear{
+    clear: both;
+}
+
+.w100{
+    /* border: 1px solid black; */
+    border: 0.1rem solid black;
+    width: 100%;
+    height: auto;
+    float: left;
+    margin: 0.2rem;
+}
+
+.w60{
+    width: 60%;
+    float: left;
+}
+
+.w50{
+    width: 50%;
+    float: left;
+}
+
+.w40{
+    width: 40%;
+    float: left;
+}
+
+
+
+.box{
+    height: 10rem;
+    border: 0.1rem solid black;
+    margin: 0.1rem 0.5rem;
+    text-align: center;
+}
+
+
+.h200{
+    min-height: 20.45rem;
+}
+
+.immagine{
+    width: 14rem;
+    text-align: center;
+}
+
+.immagine img{
+    width: 100%;
+    /* border: 1px solid black; */
+}
