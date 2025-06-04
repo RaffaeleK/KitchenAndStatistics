@@ -1,6 +1,5 @@
 html{
     font-size: 20px;
-    background-color: blue;
 }
 
 h2{
@@ -15,8 +14,9 @@ h2{
     /* margin: 0.5rem 0.5rem; */
     margin: 5% 5%;
     text-align: center;
-    font-size: 3rem;
-    align-items: center;
+    font-size: 6rem;
+    padding-bottom: 10%;
+    /* align-items: center; */
 }
 
 
@@ -25,9 +25,9 @@ h2{
 }
 
 .immagine{
-    width: 14rem;
-    align-items: center;
-    align-content: center;
+    width: 15%;
+    /* align-items: center; */
+    /* align-content: center; */
 }
 
 .immagine img{
