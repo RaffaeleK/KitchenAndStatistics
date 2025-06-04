@@ -6,6 +6,6 @@
       border: none;
 }
 .fullscreen-bg {
-  background-color: #0d6efd; /* blu Bootstrap, oppure usa #007bff o quello che preferisci */
+  background-color: #0d6efd; 
   min-height: 100vh;
 }
