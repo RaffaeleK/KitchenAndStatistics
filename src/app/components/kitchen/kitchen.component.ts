@@ -25,7 +25,7 @@ export class KitchenComponent implements OnInit, OnDestroy{
 
     orderService.getStations().subscribe( 
       {
-        next : r => this.types = r,
+        next : r => {this.types = r; this.orderTypeFilter = this.types[0]; this.applyFilter()},
         error : r => this.types = [] 
       }
     );
@@ -48,6 +48,7 @@ export class KitchenComponent implements OnInit, OnDestroy{
       error : r => this.orders = []
     })
 
+    
   }
 
   
