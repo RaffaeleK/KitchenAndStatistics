@@ -26,7 +26,7 @@ export class KitchenComponent implements OnInit, OnDestroy{
 
     orderService.getStations().subscribe( 
       {
-        next : r => {this.types = r; this.orderTypeFilter = this.types[0]; this.applyFilter()},
+        next : r => {this.types = r; this.orderTypeFilter = this.types[0]; this.applyFilter(); this.updateSummary()},
         error : r => this.types = [] 
       }
     );
@@ -45,13 +45,13 @@ export class KitchenComponent implements OnInit, OnDestroy{
   {
     this.orderService.getOrdersById(this.orderTypeFilter!.id!).subscribe({
 
-      next : r => this.orders = r,
+      next : r => {this.orders = r; this.updateSummary()},
       error : r => this.orders = []
     })
-    this.updateSummary();
   }
 
-  updateSummary() {
+  updateSummary()
+  {
     this.summary = {};
     if (this.orders) {
       this.orders.forEach(order => {
@@ -62,7 +62,7 @@ export class KitchenComponent implements OnInit, OnDestroy{
         }
       });
     }
-  }
 
-  
+    console.log(this.summary)
+  }
 }
