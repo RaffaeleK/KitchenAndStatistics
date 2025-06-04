@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { Order, orderType } from '../model/order';
+import { RecivedOrder, orderType } from '../model/order';
 import { map, Observable } from 'rxjs';
 import { environment } from '../../enviroments/enviroment'
 import { HttpClient } from '@angular/common/http';
@@ -16,8 +16,8 @@ export class OrderService {
 
   }
 
-  getOrdersById(id: number) : Observable<Order[]>{
-    return this.http.get<Order[]>(environment.apiKitchen + '/kitchen/'+id+'/order').pipe(
+  getOrdersById(id: number) : Observable<RecivedOrder[]>{
+    return this.http.get<RecivedOrder[]>(environment.apiKitchen + '/kitchen/'+id+'/order').pipe(
       map((data:any) => data.map((item:any) => ({       
           id: item.id,
           productId: item.productId,

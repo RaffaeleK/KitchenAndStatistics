@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit, effect } from '@angular/core';
-import { Order, orderType } from '../../model/order';
+import {orderType, RecivedOrder } from '../../model/order';
 import { OrderService } from '../../services/order.service';
 import { OrderComponent } from '../order/order.component';
 import { HeaderComponent } from '../header/header.component';
@@ -15,7 +15,7 @@ import { FormsModule } from '@angular/forms';
 export class KitchenComponent implements OnInit, OnDestroy{
 
   //const INITIALID = 1
-  orders? : Order[]
+  orders? : RecivedOrder[]
   orderTypeFilter? : orderType
   types? : orderType[]
   private ordersTimer: any;
