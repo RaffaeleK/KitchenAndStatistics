@@ -4,15 +4,26 @@ export class orderType
     name? : string
 }
 
-export class Order
+ abstract class Order
 {
     id? : number
     name? : string
     productId?: number
-    tableId?: number
     qty?: number
     price?: number
     orderDate?: Date
     completionDate?: Date
-    orderType? : orderType
+    
 }
+
+export class RecivedOrder extends Order
+{
+    orderType? : orderType
+    tableId?: number
+}
+
+export class OrderStats extends Order
+{
+    image?: string
+}
+

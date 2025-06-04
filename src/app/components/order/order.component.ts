@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { OrderService } from '../../services/order.service';
-import { Order } from '../../model/order';
+import {RecivedOrder } from '../../model/order';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 })
 export class OrderComponent {
 
-  @Input() order!: Order;  
+  @Input() order!: RecivedOrder;  
 
   constructor(private orderService : OrderService)
   {
