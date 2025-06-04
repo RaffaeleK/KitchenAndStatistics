@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { StatsService } from '../../services/stats.service';
 
 @Component({
   selector: 'app-statistics',
@@ -8,4 +9,7 @@ import { Component } from '@angular/core';
 })
 export class StatisticsComponent {
   
+  constructor(private statsService: StatsService) { 
+    
+  }
 }
