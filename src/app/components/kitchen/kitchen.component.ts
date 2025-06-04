@@ -20,6 +20,7 @@ export class KitchenComponent implements OnInit, OnDestroy{
   orderTypeFilter? : orderType
   types? : orderType[]
   private ordersTimer: any;
+  
 
   constructor(private orderService : OrderService) {
 
@@ -31,7 +32,7 @@ export class KitchenComponent implements OnInit, OnDestroy{
     );
   }
   ngOnInit(): void {
-    this.ordersTimer = setInterval(() =>{this.applyFilter()},30000);
+    this.ordersTimer = setInterval(() =>{this.applyFilter()},15000);
   }
 
   ngOnDestroy(): void {

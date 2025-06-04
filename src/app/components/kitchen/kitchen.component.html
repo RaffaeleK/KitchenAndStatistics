@@ -1,8 +1,10 @@
 <app-header></app-header>
-<div class="d-flex my-3 mx-2">
-    <select class="form-select" [(ngModel)]="orderTypeFilter" (change)="applyFilter()">
-        <option *ngFor="let type of types" [ngValue]="type">{{type.name}}</option>
-    </select> 
+<div class="d-flex justify-content-end">
+    <div class="d-flex my-3 mx-2 w-25">
+        <select class="form-select" [(ngModel)]="orderTypeFilter" (change)="applyFilter()">
+            <option *ngFor="let type of types" [ngValue]="type">{{type.name}}</option>
+        </select> 
+    </div>
 </div>
 <div class="d-flex justify-content-between">
     <div class="d-flex justify-content-start flex-wrap w-80">
