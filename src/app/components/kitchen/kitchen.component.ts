@@ -20,7 +20,7 @@ export class KitchenComponent implements OnInit, OnDestroy{
   orderTypeFilter? : orderType
   types? : orderType[]
   private ordersTimer: any;
-  
+  summary: {[name: string]: number} = {};
 
   constructor(private orderService : OrderService) {
 
@@ -48,8 +48,20 @@ export class KitchenComponent implements OnInit, OnDestroy{
       next : r => this.orders = r,
       error : r => this.orders = []
     })
+    this.updateSummary();
+  }
 
-    
+  updateSummary() {
+    this.summary = {};
+    if (this.orders) {
+      this.orders.forEach(order => {
+        if (this.summary[order.name!]) {
+          this.summary[order.name!] += order.qty!;
+        } else {
+          this.summary[order.name!] = order.qty!;
+        }
+      });
+    }
   }
 
   
