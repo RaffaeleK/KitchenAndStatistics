@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Order, orderType } from '../../model/order';
 import { OrderService } from '../../services/order.service';
 import { OrderComponent } from '../order/order.component';
@@ -13,12 +13,13 @@ import { waitForAsync } from '@angular/core/testing';
   templateUrl: './kitchen.component.html',
   styleUrl: './kitchen.component.css'
 })
-export class KitchenComponent {
+export class KitchenComponent implements OnInit, OnDestroy{
 
   //const INITIALID = 1
   orders? : Order[]
   orderTypeFilter? : orderType
   types? : orderType[]
+  private ordersTimer: any;
 
   constructor(private orderService : OrderService) {
 
@@ -28,6 +29,15 @@ export class KitchenComponent {
         error : r => this.types = [] 
       }
     );
+  }
+  ngOnInit(): void {
+    this.ordersTimer = setInterval(() =>{this.applyFilter()},30000);
+  }
+
+  ngOnDestroy(): void {
+    if (this.ordersTimer) {
+      clearInterval(this.ordersTimer);
+    }
   }
 
   applyFilter()
@@ -39,4 +49,6 @@ export class KitchenComponent {
     })
 
   }
+
+  
 }
