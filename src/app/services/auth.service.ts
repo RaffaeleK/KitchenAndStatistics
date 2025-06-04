@@ -50,7 +50,7 @@ export class AuthService {
     return !this.jwtHelper.isTokenExpired(token);
   }
 
-  getFieldFromToken()
+  getUniqueNameFromToken()
   {
     var token = localStorage.getItem('token');
     if( !token || !this.isLogged() ) return 0;
