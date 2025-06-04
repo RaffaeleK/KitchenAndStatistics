@@ -1,5 +1,5 @@
-<div class="card mx-2 my-2" style="width: 18rem; min-height: 18em;">
-    <div class="d-flex justify-content-evenly py-2">
+<div class="card mx-1 my-2" style="width: 17rem; min-height: 18em;">
+    <div class="d-flex justify-content-evenly py-2 bg-info">
         <p>Order ID: {{order.id}} </p>
         <p>Order Time: {{order.orderDate | date:'HH:mm'}}</p>
     </div>
@@ -9,7 +9,7 @@
         <h5 class="card-title">Product name: {{order.name}}</h5>
         <h5 class="card-title">Quantity: {{order.qty}}</h5>
         <div class="mt-auto d-flex">
-            <a class="btn btn-primary" (click)="signAsCompleted()">Sign as completed</a>
+            <a class="btn btn-success" (click)="signAsCompleted()">Sign as completed <i class="bi bi-check2"></i></a>
         </div>
     </div>
 </div>

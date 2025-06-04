@@ -21,8 +21,6 @@ export class OrderComponent {
   signAsCompleted()
   {
     this.order.completionDate = new Date();
-    console.log(`${this.order.orderType!.id!} ${this.order.id!}`)
-
     this.orderService.orderDone(this.order.orderType!.id!, this.order.id!).subscribe()
   }
 }

@@ -38,7 +38,7 @@ export class KitchenComponent implements OnInit, OnDestroy{
 
   }
   ngOnInit(): void {
-    this.ordersTimer = setInterval(() =>{this.applyFilter()},15000);
+    this.ordersTimer = setInterval(() =>{this.applyFilter()}, 10000);
   }
 
   ngOnDestroy(): void {
@@ -50,18 +50,7 @@ export class KitchenComponent implements OnInit, OnDestroy{
   applyFilter()
   {
     this.orderService.getOrdersById(this.orderTypeFilter!.id!).subscribe({
-      next: r => {
-        // Converti ogni orderDate in ora di Roma
-        this.orders = r.map(order => {
-          if (order.orderDate) {
-            const utcDate = new Date(order.orderDate);
-            const romeOffset = new Date().toLocaleString('en-US', { timeZone: 'Europe/Rome', timeZoneName: 'short' }).includes('CEST') ? 2 : 1;
-            const romeDate = new Date(utcDate.getTime() + romeOffset * 60 * 60 * 1000);
-            return { ...order, orderDate: romeDate };
-          }
-          return order;
-        });
-      },
+      next: r => this.orders = r,
       error: r => this.orders = []
     });
   }
