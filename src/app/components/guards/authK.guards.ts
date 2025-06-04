@@ -13,7 +13,7 @@ export const AuthGuardK: CanActivateFn = (route, state) => {
 
 
   
-  if(authService.getFieldFromToken() == "stats"){
+  if(authService.getUniqueNameFromToken() == "stats"){
     router.navigate(['login']);
   }
 

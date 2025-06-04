@@ -11,7 +11,7 @@ export const AuthGuardS: CanActivateFn = (route, state) => {
       return false;
   }
 
-  if(authService.getFieldFromToken() == "kitchen"){
+  if(authService.getUniqueNameFromToken() == "kitchen"){
     router.navigate(['login']);
   }
 
