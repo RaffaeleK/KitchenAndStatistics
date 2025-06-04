@@ -5,6 +5,7 @@ import { OrderService } from '../../services/order.service';
 import { OrderComponent } from '../order/order.component';
 import { HeaderComponent } from '../header/header.component';
 import { FormsModule } from '@angular/forms';
+import { waitForAsync } from '@angular/core/testing';
 
 @Component({
   selector: 'app-kitchen',
@@ -15,18 +16,27 @@ import { FormsModule } from '@angular/forms';
 export class KitchenComponent {
 
   //const INITIALID = 1
-  //orders : Order[]
-  orderTypeFilter? : orderType[]
+  orders? : Order[]
+  orderTypeFilter? : orderType
   types? : orderType[]
 
-  constructor(private orderService : OrderService) { 
+  constructor(private orderService : OrderService) {
 
-    /*for(i = 1; i <= orderService.)
-    this.orders = orderService.getOrders()*/
+    orderService.getStations().subscribe( 
+      {
+        next : r => this.types = r,
+        error : r => this.types = [] 
+      }
+    );
   }
 
   applyFilter()
   {
+    this.orderService.getOrdersById(this.orderTypeFilter!.id!).subscribe({
+
+      next : r => this.orders = r,
+      error : r => this.orders = []
+    })
 
   }
 }

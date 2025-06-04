@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs';
-import { environment } from '../../enviroments/enviromennt';
+import { environment } from '../../enviroments/enviroment';
 import { AuthToken } from '../model/AuthToken';
 import { JwtHelperService } from '@auth0/angular-jwt';
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Order, orderType } from '../model/order';
 import { map, Observable } from 'rxjs';
-import { environment } from '../../enviroments/enviromennt';
+import { environment } from '../../enviroments/enviroment';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -23,10 +23,10 @@ export class OrderService {
 
   }
 
-  getOrdersById(id: number){
-    return this.http.get<Order[]>(environment.apiKitchen + 'kitchen/'+id+'/order').pipe(
-      map((data:any) => data.map((item:any) => {
-        return{
+  getOrdersById(id: number) : Observable<Order[]>{
+    return this.http.get<Order[]>(environment.apiKitchen + '/kitchen/'+id+'/order').pipe(
+      map((data:any) => data.map((item:any) => ({
+        
           id: item.id,
           productId: item.productId,
           tableId: item.tableId,
@@ -35,24 +35,23 @@ export class OrderService {
           price: item.price,
           orderDate:  <Date>(item.orderDate),
           completionDate: null
-        }
-      }))
+        
+      })))
     )
    
   }
 
   orderDone(id: number, orderId: number){
-    this.http.post(environment.apiKitchen + 'kitchen/'+id+'/order', `[{"id": ${orderId}}]`)
+    this.http.post(environment.apiKitchen + '/kitchen/'+id+'/order', `[{"id": ${orderId}}]`)
   }
 
-  getStations(){
-    return this.http.get<orderType[]>(environment.apiKitchen + 'kitchen/').pipe(
-      map((data:any) => data.map((item:any) => {
-        return{
-          name: item.name
-        }
-      }))
-    )
+  getStations() : Observable<orderType[]>{
+    return this.http.get<orderType[]>(environment.apiKitchen + '/kitchen/').pipe(
+      map((data:any[]) => data.map((item:any) => ({
+        id : item.id,
+        name: item.name
+      })))
+    );
   }
 
 

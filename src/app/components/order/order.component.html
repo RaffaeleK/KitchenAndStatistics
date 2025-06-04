@@ -1,7 +1,7 @@
 <div class="card mx-2" style="width: 18rem;">
     <div class="d-flex justify-content-evenly py-2">
         <p>Order ID: {{order.id}} </p>
-        <p>Order Time: {{order.orderDate?.getHours()}}:{{order.orderDate?.getMinutes()?.toString()?.padStart(2, "0")}}</p>
+        <p>Order Time: {{order.orderDate | date:'HH:mm'}}</p>
     </div>
     <hr class="my-2 border-primary">
     <div class="card-body">

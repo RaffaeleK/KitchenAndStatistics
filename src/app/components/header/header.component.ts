@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.dateTime = new Date();
   }
 
-    ngOnInit(): void {
+  ngOnInit(): void {
     this.timer = setInterval(() => {
       this.dateTime = new Date();
     },1000);
