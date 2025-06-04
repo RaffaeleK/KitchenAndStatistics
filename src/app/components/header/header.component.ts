@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { KitchenComponent } from '../kitchen/kitchen.component';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +16,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   dateTime: Date;
   private timer: any;
 
-  constructor(public kitchenComponent : KitchenComponent)
+  constructor(public kitchenComponent : KitchenComponent, private auth: AuthService, private router: Router)
   {
     this.dateTime = new Date();
   }
@@ -30,4 +32,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
       clearInterval(this.timer);
     }
   }
+
+  Logout():void {
+    this.auth.logout().subscribe(() => this.router.navigate(['login']))
+  }
 }
+
