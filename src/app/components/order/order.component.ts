@@ -12,4 +12,17 @@ import { CommonModule } from '@angular/common';
 export class OrderComponent {
 
   @Input() order!: Order;  
+
+  constructor(private orderService : OrderService)
+  {
+    
+  }
+
+  signAsCompleted()
+  {
+    this.order.completionDate = new Date();
+    console.log(`${this.order.orderType!.id!} ${this.order.id!}`)
+
+    this.orderService.orderDone(this.order.orderType!.id!, this.order.id!).subscribe()
+  }
 }

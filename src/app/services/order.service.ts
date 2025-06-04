@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Order, orderType } from '../model/order';
 import { map, Observable } from 'rxjs';
-import { environment } from '../../enviroments/enviroment';
+import { environment } from '../../enviroments/enviroment'
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -9,14 +9,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class OrderService {
 
-  orders : Order[] = [
-    {
-      id:1, productId: 18, tableId:6, name: "Tuna", qty: 3, price: 31, orderDate: new Date, completionDate: new Date 
-    },
-    {
-      id:2, productId: 42, tableId:9, name: "Ugolini", qty: 5, price: 43, orderDate: new Date, completionDate: new Date 
-    }
-  ]
+  reloaded = signal(false)
   
   constructor(private http: HttpClient)
   {
@@ -25,8 +18,7 @@ export class OrderService {
 
   getOrdersById(id: number) : Observable<Order[]>{
     return this.http.get<Order[]>(environment.apiKitchen + '/kitchen/'+id+'/order').pipe(
-      map((data:any) => data.map((item:any) => ({
-        
+      map((data:any) => data.map((item:any) => ({       
           id: item.id,
           productId: item.productId,
           tableId: item.tableId,
@@ -34,15 +26,20 @@ export class OrderService {
           qty: item.qty,
           price: item.price,
           orderDate:  <Date>(item.orderDate),
-          completionDate: null
-        
+          completionDate: null,
+          orderType: { id: id }
       })))
     )
    
   }
 
-  orderDone(id: number, orderId: number){
-    this.http.post(environment.apiKitchen + '/kitchen/'+id+'/order', `[{"id": ${orderId}}]`)
+  orderDone(id: number, orderId: number): Observable<any> {
+    return this.http.post(environment.apiKitchen + '/kitchen/' + id + '/order', [{ id: orderId }]).pipe(
+      map(result => {
+        this.reloaded.set(true);
+        return result;
+      })
+    );
   }
 
   getStations() : Observable<orderType[]>{
@@ -53,6 +50,4 @@ export class OrderService {
       })))
     );
   }
-
-
 }

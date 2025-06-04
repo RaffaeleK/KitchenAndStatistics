@@ -1,11 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, effect } from '@angular/core';
 import { Order, orderType } from '../../model/order';
 import { OrderService } from '../../services/order.service';
 import { OrderComponent } from '../order/order.component';
 import { HeaderComponent } from '../header/header.component';
 import { FormsModule } from '@angular/forms';
-import { waitForAsync } from '@angular/core/testing';
 
 @Component({
   selector: 'app-kitchen',
@@ -20,16 +19,23 @@ export class KitchenComponent implements OnInit, OnDestroy{
   orderTypeFilter? : orderType
   types? : orderType[]
   private ordersTimer: any;
-  summary: {[name: string]: number} = {};
 
   constructor(private orderService : OrderService) {
 
     orderService.getStations().subscribe( 
       {
-        next : r => {this.types = r; this.orderTypeFilter = this.types[0]; this.applyFilter(); this.updateSummary()},
+        next : r => {this.types = r; this.orderTypeFilter = this.types[0]; this.applyFilter();},
         error : r => this.types = [] 
       }
     );
+
+    effect(() => {
+      if (this.orderService.reloaded()) {
+        this.applyFilter(); 
+        this.orderService.reloaded.set(false);
+      }
+    });
+
   }
   ngOnInit(): void {
     this.ordersTimer = setInterval(() =>{this.applyFilter()},15000);
@@ -44,25 +50,36 @@ export class KitchenComponent implements OnInit, OnDestroy{
   applyFilter()
   {
     this.orderService.getOrdersById(this.orderTypeFilter!.id!).subscribe({
-
-      next : r => {this.orders = r; this.updateSummary()},
-      error : r => this.orders = []
-    })
+      next: r => {
+        // Converti ogni orderDate in ora di Roma
+        this.orders = r.map(order => {
+          if (order.orderDate) {
+            const utcDate = new Date(order.orderDate);
+            const romeOffset = new Date().toLocaleString('en-US', { timeZone: 'Europe/Rome', timeZoneName: 'short' }).includes('CEST') ? 2 : 1;
+            const romeDate = new Date(utcDate.getTime() + romeOffset * 60 * 60 * 1000);
+            return { ...order, orderDate: romeDate };
+          }
+          return order;
+        });
+      },
+      error: r => this.orders = []
+    });
   }
 
-  updateSummary()
+  getSummary() : {[name: string]: number}
   {
-    this.summary = {};
+    var summary: {[name: string]: number} = {};
+
     if (this.orders) {
       this.orders.forEach(order => {
-        if (this.summary[order.name!]) {
-          this.summary[order.name!] += order.qty!;
+        if (summary[order.name!]) {
+          summary[order.name!] += order.qty!;
         } else {
-          this.summary[order.name!] = order.qty!;
+          summary[order.name!] = order.qty!;
         }
       });
     }
 
-    console.log(this.summary)
+    return summary
   }
 }

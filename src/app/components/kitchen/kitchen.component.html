@@ -16,7 +16,7 @@
         <div class="bg-dark w-20 mx-2" style="min-width: 18em; min-height: 35em;">
             <div class="mx-2 text-light">
                 <ul>
-                  <li *ngFor="let entry of summary | keyvalue">
+                  <li *ngFor="let entry of getSummary() | keyvalue">
                     {{ entry.key }} x{{ entry.value }}
                   </li>
                 </ul>
