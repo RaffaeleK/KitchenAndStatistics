@@ -62,7 +62,7 @@
         <div class=" d-flex justify-content-around">
             @for(dish of getFirstFiveOrderedDish(); track dish){
                 <div class="w-25 d-flex justify-content-center flex-column align-items-center" style="font-size: 1.5rem;">
-                    <img class="w-75" src="{{findDish(dish)}}" alt="">
+                    <img class="w-75 h-75" src="{{findDish(dish)}}" alt="">
                     {{dish}}
                 </div>
             }
