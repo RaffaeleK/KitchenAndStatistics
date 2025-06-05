@@ -8,46 +8,38 @@
         <div class="w-50 position-relative d-flex ">
             <div class="interBox-bg w-100 flex-column text-center border border-4 rounded-4 border-black my-2 mx-2">
                 <div class="h3">Tables</div>
-                <div  style="font-size: 7rem;">0</div>
+                <div  style="font-size: 6rem;">{{getAllOccupietedTable()}}</div>
             </div>
         </div>
         
         <div class="w-50 position-relative d-flex ">
             <div class="interBox-bg w-100 flex-column text-center border border-4 rounded-4 border-black my-2 mx-2">
                 <div class="h3">Customers</div>
-                <div  style="font-size: 7rem;">0</div>
+                <div  style="font-size: 6rem;">{{getNumberOfCustomers()}}</div>
             </div>
         </div>
         
         <div class="w-50 position-relative d-flex ">
             <div class="interBox-bg w-100 flex-column text-center border border-4 rounded-4 border-black my-2 mx-2">
                 <div class="h3">Waiting Orders</div>
-                <div  style="font-size: 7rem;">0</div>
+                <div  style="font-size: 6rem;">{{getWaitingOrders()}}</div>
             </div>
         </div>
         
         <div class="w-50 position-relative d-flex ">
             <div class="interBox-bg w-100 flex-column text-center border border-4 rounded-4 border-black my-2 mx-2">
                 <div class="h3">Prepared Orders</div>
-                <div  style="font-size: 7rem;">0</div>
+                <div  style="font-size: 6rem;">{{getPreparedOrders()}}</div>
             </div>
         </div>
         
     </div>
     <div class="w-50 position-relative d-flex">
-        <!-- <div class="flex-column justify-content-center text-center border border-4 rounded-4 border-black my-2 mx-2">
-            <h2>Dish of the day</h2>
-            <div class="w-75 flex-column text-center ">
-                <img class="w-100" src="https://storage.cloud.google.com/pw2025/scallop.jpeg" alt="">
 
-            </div>
-        </div> -->
-        
-        
         <div class="interBox-bg w-100 d-flex justify-content-between flex-column align-items-center border border-4 rounded-4 border-black my-2 mx-2">
             <div class="h2">Dish of the day</div>
-            <img class="w-50" src="https://storage.cloud.google.com/pw2025/scallop.jpeg" alt="">
-            <h2>nome</h2>
+            <img class="w-50" src="{{getMostOrderedDish()}}" alt="">
+            <h2 >{{mostOrdered}}</h2>
         </div>
     </div>
 
@@ -64,26 +56,35 @@
     <!-- da farlo con un ngFor e usare possibilmente le prime cinque pù ordinate-->
 
     <div class=" d-flex justify-content-around">
-        <div class="w-25 d-flex justify-content-center flex-column align-items-center" style="font-size: 2.5rem;">
-            <img class="w-75" src="https://storage.cloud.google.com/pw2025/scallop.jpeg" alt="">
-            nome
-        </div>
-        <div class="w-25 d-flex justify-content-center flex-column align-items-center" style="font-size: 2.5rem;">
-            <img class="w-75" src="https://storage.cloud.google.com/pw2025/scallop.jpeg" alt="">
-            nome
-        </div>
-        <div class="w-25 d-flex justify-content-center flex-column align-items-center" style="font-size: 2.5rem;">
-            <img class="w-75" src="https://storage.cloud.google.com/pw2025/scallop.jpeg" alt="">
-            nome
-        </div>
-        <div class="w-25 d-flex justify-content-center flex-column align-items-center" style="font-size: 2.5rem;">
-            <img class="w-75" src="https://storage.cloud.google.com/pw2025/scallop.jpeg" alt="">
-            nome
-        </div>
-        <div class="w-25 d-flex justify-content-center flex-column align-items-center" style="font-size: 2.5rem;">
-            <img class="w-75" src="https://storage.cloud.google.com/pw2025/scallop.jpeg" alt="">
-            nome
-        </div>
+        @for(dish of getFirstFiveOrderedDish(); track dish){
+            <div class="w-25 d-flex justify-content-center flex-column align-items-center" style="font-size: 2.5rem;">
+                <img class="w-75" src="{{findDish(dish)}}" alt="">
+                {{dish}}
+            </div>
+        }
     </div>
+
+    <!-- <div class=" d-flex justify-content-around">
+        <div class="w-25 d-flex justify-content-center flex-column align-items-center" style="font-size: 2.5rem;">
+            <img class="w-75" src="https://storage.cloud.google.com/pw2025/scallop.jpeg" alt="">
+            nome
+        </div>
+        <div class="w-25 d-flex justify-content-center flex-column align-items-center" style="font-size: 2.5rem;">
+            <img class="w-75" src="https://storage.cloud.google.com/pw2025/scallop.jpeg" alt="">
+            nome
+        </div>
+        <div class="w-25 d-flex justify-content-center flex-column align-items-center" style="font-size: 2.5rem;">
+            <img class="w-75" src="https://storage.cloud.google.com/pw2025/scallop.jpeg" alt="">
+            nome
+        </div>
+        <div class="w-25 d-flex justify-content-center flex-column align-items-center" style="font-size: 2.5rem;">
+            <img class="w-75" src="https://storage.cloud.google.com/pw2025/scallop.jpeg" alt="">
+            nome
+        </div>
+        <div class="w-25 d-flex justify-content-center flex-column align-items-center" style="font-size: 2.5rem;">
+            <img class="w-75" src="https://storage.cloud.google.com/pw2025/scallop.jpeg" alt="">
+            nome
+        </div>
+    </div> -->
 </div>
 </div>
