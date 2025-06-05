@@ -4,6 +4,8 @@ import { Table } from '../../model/table';
 import { OrderStats } from '../../model/order';
 import { environment } from '../../../enviroments/enviroment';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-statistics',
@@ -19,7 +21,7 @@ export class StatisticsComponent {
 
   requestedOrders: Map<string, number> = new Map<string, number>();
 
-  constructor(private statsService: StatsService) { 
+  constructor(private statsService: StatsService, private auth: AuthService, private router: Router) { 
     statsService.getTables().subscribe(r => this.tables = r)
     statsService.getOrdersStats().subscribe(r => {this.orders = r.filter(r => r.category != "Beverages"); this.organiseOrdersByPeople()});
     
@@ -99,5 +101,9 @@ export class StatisticsComponent {
     });
     
     return this.requestedOrders;
+  }
+
+  Logout():void {
+    this.auth.logout().subscribe(() => this.router.navigate(['login']))
   }
 }
