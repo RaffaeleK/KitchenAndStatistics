@@ -1,5 +1,5 @@
 <div class="fullscreen-bg d-flex justify-content-center align-items-center">
-  <div class="card p-4 shadow-sm rounded" style="min-width: 350px;">
+  <div class="card p-4 shadow-sm rounded" style="min-width: 380px;">
     <h4 class="mb-4 text-center">Login</h4>
     <form (ngSubmit)="login()">
       <div class="mb-3">
@@ -21,12 +21,10 @@
           [(ngModel)]="passwordInput"
           class="form-control"
           placeholder="Password">
-          <i class="position-absolute p-0 IconVisibility" [ngClass]="passwordVisible ? 'bi bi-eye-slash-fill' : 'bi bi-eye-fill'" (click)="togglePasswordVisibility()"></i>
+          <i class="position-absolute IconVisibility" [ngClass]="passwordVisible ? 'bi bi-eye-slash-fill' : 'bi bi-eye-fill'" (click)="togglePasswordVisibility()"></i>
         </span>
-        
-        <small class="text-danger d-block mt-1">{{ errorstring }}</small>
       </div>
-
+        <small class="text-danger d-block m-2">{{ errorstring }}</small>
       <input type="submit" class="btn btn-primary w-100" (click)="login()" value="accedi">
     </form>
   </div>

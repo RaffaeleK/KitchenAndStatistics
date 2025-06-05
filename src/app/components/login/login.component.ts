@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 export class LoginComponent {
   emailInput: string = ''
   passwordInput : string = '' 
-  errorstring : string = ''
+  errorstring : string = ' '
 
   constructor(private authservice: AuthService, private route: Router){
 
