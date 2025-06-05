@@ -42,7 +42,6 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   updateConstumersAndTables(){
     this.occupiedTables = this.getAllOccupietedTable();
     this.nCostumers = this.getNumberOfCustomers();
-    console.log("aggiornamento clienti e tavoli");
   }
   updateData(){
     this.fillAndOrganiseOrdersByPeople();
@@ -50,7 +49,6 @@ export class StatisticsComponent implements OnInit, OnDestroy {
     this.preparedOrders = this.getPreparedOrders();
     this.mostOrderedDish = this.getMostOrderedDish();
     this.firstFiveOrderedDishes = this.getFirstFiveOrderedDish();
-    console.log("dentro");
   }
   ngOnInit(): void {
     this.timer = setInterval(() => this.callAPIs(), 15000)
@@ -110,18 +108,15 @@ export class StatisticsComponent implements OnInit, OnDestroy {
 
     this.requestedOrders.forEach((value, key) => {
       if (count < 5) {
-        console.log(key + " " + value)
         orderedDishes.push(key);
         count++;
       }
     });
 
-    console.log(orderedDishes)
     return orderedDishes;
   }
 
   findDish(name: string): string{
-    console.log(environment.apiImage + this.orders.find(o => o.name == name)!.image!)
     return environment.apiImage + this.orders.find(o => o.name == name)!.image!;
   }
 
