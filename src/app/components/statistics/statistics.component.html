@@ -2,7 +2,7 @@
     <h1 class="textColor d-flex justify-content-around">Fusion Sushi Restaraunt</h1>
 
 
-<div class="d-flex">
+<div class="d-flex" style="height: 60vh;">
 
     <div class="w-75 container d-flex justify-content-around flex-wrap">
         <div class="w-50 position-relative d-flex ">
@@ -57,34 +57,11 @@
 
     <div class=" d-flex justify-content-around">
         @for(dish of getFirstFiveOrderedDish(); track dish){
-            <div class="w-25 d-flex justify-content-center flex-column align-items-center" style="font-size: 2.5rem;">
+            <div class="w-25 d-flex justify-content-center flex-column align-items-center" style="font-size: 1.5rem;">
                 <img class="w-75" src="{{findDish(dish)}}" alt="">
                 {{dish}}
             </div>
         }
     </div>
-
-    <!-- <div class=" d-flex justify-content-around">
-        <div class="w-25 d-flex justify-content-center flex-column align-items-center" style="font-size: 2.5rem;">
-            <img class="w-75" src="https://storage.cloud.google.com/pw2025/scallop.jpeg" alt="">
-            nome
-        </div>
-        <div class="w-25 d-flex justify-content-center flex-column align-items-center" style="font-size: 2.5rem;">
-            <img class="w-75" src="https://storage.cloud.google.com/pw2025/scallop.jpeg" alt="">
-            nome
-        </div>
-        <div class="w-25 d-flex justify-content-center flex-column align-items-center" style="font-size: 2.5rem;">
-            <img class="w-75" src="https://storage.cloud.google.com/pw2025/scallop.jpeg" alt="">
-            nome
-        </div>
-        <div class="w-25 d-flex justify-content-center flex-column align-items-center" style="font-size: 2.5rem;">
-            <img class="w-75" src="https://storage.cloud.google.com/pw2025/scallop.jpeg" alt="">
-            nome
-        </div>
-        <div class="w-25 d-flex justify-content-center flex-column align-items-center" style="font-size: 2.5rem;">
-            <img class="w-75" src="https://storage.cloud.google.com/pw2025/scallop.jpeg" alt="">
-            nome
-        </div>
-    </div> -->
 </div>
 </div>
