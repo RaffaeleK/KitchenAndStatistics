@@ -74,12 +74,12 @@ export class StatisticsComponent {
 
     this.requestedOrders.forEach((value, key) => {
       if (count < 5) {
-        console.log(environment.apiImage + this.orders.find(o => o.name == key)!.image!)
-        orderedDishes.push(key.toLowerCase().slice(key.indexOf(` (`), key.length - key.indexOf(' (')).replace(' ', '_'));
+        orderedDishes.push(key);
         count++;
       }
     });
 
+    console.log(orderedDishes)
     return orderedDishes;
   }
 
@@ -99,9 +99,5 @@ export class StatisticsComponent {
     });
     
     return this.requestedOrders;
-  }
-
-  getApi(): string{
-    return environment.apiImage;
   }
 }
