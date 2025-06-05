@@ -8,3 +8,8 @@
 .textColor{
     color: beige;
 }
+
+.buttonPosition {
+    position: absolute;
+    right: 1rem;
+}
