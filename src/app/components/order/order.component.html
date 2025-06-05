@@ -1,8 +1,25 @@
 <div class="card mx-1 my-2" style="width: 17rem; min-height: 18em;">
-    <div class="d-flex justify-content-evenly py-2 bg-info">
-        <p>Order ID: {{order.id}} </p>
-        <p>Order Time: {{order.orderDate | date:'HH:mm'}}</p>
-    </div>
+    @if(isOrderDanger())
+    {
+        <div class="d-flex justify-content-evenly py-2 bg-danger">
+            <p>Order ID: {{order.id}} </p>
+            <p>Order Time: {{getOrderTime(order.orderDate!)}}</p>
+        </div>
+    }
+    @else if(isOrderWarning())
+    {
+        <div class="d-flex justify-content-evenly py-2 bg-warning">
+            <p>Order ID: {{order.id}} </p>
+            <p>Order Time: {{getOrderTime(order.orderDate!)}}</p>
+        </div>
+    }
+    @else
+    {
+        <div class="d-flex justify-content-evenly py-2 bg-info">
+            <p>Order ID: {{order.id}} </p>
+            <p>Order Time: {{getOrderTime(order.orderDate!)}}</p>
+        </div>
+    }
     <hr class="my-2 border-primary">
     <div class="card-body d-flex flex-column">
         <h4>Table: {{order.tableId}}</h4> 

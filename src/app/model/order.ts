@@ -4,7 +4,7 @@ export class orderType
     name? : string
 }
 
- abstract class Order
+abstract class Order
 {
     id? : number
     name? : string
@@ -26,4 +26,3 @@ export class OrderStats extends Order
 {
     image?: string
 }
-
