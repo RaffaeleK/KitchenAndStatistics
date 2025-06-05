@@ -25,4 +25,5 @@ export class RecivedOrder extends Order
 export class OrderStats extends Order
 {
     image?: string
+    category?: string
 }

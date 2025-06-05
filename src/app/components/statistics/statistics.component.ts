@@ -21,7 +21,7 @@ export class StatisticsComponent {
 
   constructor(private statsService: StatsService) { 
     statsService.getTables().subscribe(r => this.tables = r)
-    statsService.getOrdersStats().subscribe(r => {this.orders = r; this.organiseOrdersByPeople()});
+    statsService.getOrdersStats().subscribe(r => {this.orders = r.filter(r => r.category != "Beverages"); this.organiseOrdersByPeople()});
     
   }
   
