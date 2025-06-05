@@ -12,4 +12,8 @@ export class StatisticsComponent {
   constructor(private statsService: StatsService) { 
     
   }
+
+  stats(){
+    
+  }
 }
