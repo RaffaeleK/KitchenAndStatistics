@@ -31,7 +31,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
 
   constructor(private statsService: StatsService, private auth: AuthService, private router: Router) { 
     statsService.getTables().subscribe(r => this.tables = r)
-    statsService.getOrdersStats().subscribe(r => {this.orders = r.filter(r => r.category != "Beverages"); this.organiseOrdersByPeople()});
+    statsService.getOrdersStats().subscribe(r => {this.orders = r.filter(r => r.category != "Beverages"); this.fillAndOrganiseOrdersByPeople()});
     
   }
   ngOnInit(): void {
@@ -90,7 +90,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
 
   getMostOrderedDish(): string  {
     this.mostOrdered = this.requestedOrders.keys().next().value!;
-    return environment.apiImage + this.mostOrdered.toLowerCase().replace(" ", "_") + ".jpeg";
+    return this.findDish(this.mostOrdered);
   }
 
   getFirstFiveOrderedDish(): string[] {
@@ -99,6 +99,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
 
     this.requestedOrders.forEach((value, key) => {
       if (count < 5) {
+        console.log(key + " " + value)
         orderedDishes.push(key);
         count++;
       }
@@ -113,7 +114,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
     return environment.apiImage + this.orders.find(o => o.name == name)!.image!;
   }
 
-  organiseOrdersByPeople(): Map<string, number> {   
+  fillAndOrganiseOrdersByPeople(){   
 
     this.orders.forEach(order => {
       if (this.requestedOrders.has(order.name!)) {
@@ -123,7 +124,11 @@ export class StatisticsComponent implements OnInit, OnDestroy {
       }
     });
     
-    return this.requestedOrders;
+    //trovare un modo di spiegarlo
+    const sortedArray = Array.from(this.requestedOrders.entries())
+    .sort((a, b) => b[1] - a[1]);
+
+    this.requestedOrders = new Map<string, number>(sortedArray);
   }
 
   Logout():void {
