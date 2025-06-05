@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { StatsService } from '../../services/stats.service';
 import { Table } from '../../model/table';
 import { OrderStats } from '../../model/order';
@@ -13,10 +13,18 @@ import { Router } from '@angular/router';
   templateUrl: './statistics.component.html',
   styleUrl: './statistics.component.css'
 })
-export class StatisticsComponent {
+export class StatisticsComponent implements OnInit, OnDestroy {
   tables: Table[] = [];
   orders: OrderStats[] = [];
 
+  occupiedTables: number = 0;
+  nCostumers: number = 0;
+  waitingOrders: number = 0;
+  preparedOrders: number = 0;
+  mostOrderedDish: string = "";
+  firstFiveOrderedDishes: string[] = [];
+
+  timer:any;
   mostOrdered: string = "";
 
   requestedOrders: Map<string, number> = new Map<string, number>();
@@ -25,6 +33,21 @@ export class StatisticsComponent {
     statsService.getTables().subscribe(r => this.tables = r)
     statsService.getOrdersStats().subscribe(r => {this.orders = r.filter(r => r.category != "Beverages"); this.organiseOrdersByPeople()});
     
+  }
+  ngOnInit(): void {
+    this.timer = setInterval(() => {
+      this.occupiedTables = this.getAllOccupietedTable();
+      this.nCostumers = this.getNumberOfCustomers();
+      this.waitingOrders = this.getWaitingOrders();
+      this.preparedOrders = this.getPreparedOrders();
+      this.mostOrderedDish = this.getMostOrderedDish();
+      this.firstFiveOrderedDishes = this.getFirstFiveOrderedDish();
+    }, 30000)
+  }
+  ngOnDestroy(): void {
+     if (this.timer) {
+      clearInterval(this.timer);
+    }
   }
   
   getAllOccupietedTable(): number{
