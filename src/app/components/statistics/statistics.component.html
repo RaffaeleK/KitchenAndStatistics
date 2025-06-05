@@ -12,28 +12,28 @@
             <div class="w-50 position-relative d-flex ">
                 <div class="interBox-bg w-100 flex-column text-center border border-4 rounded-4 border-black my-2 mx-2">
                     <div class="h3">Tables</div>
-                    <div  style="font-size: 6rem;">{{getAllOccupietedTable()}}</div>
+                    <div  style="font-size: 6rem;">{{occupiedTables}}</div>
                 </div>
             </div>
             
             <div class="w-50 position-relative d-flex ">
                 <div class="interBox-bg w-100 flex-column text-center border border-4 rounded-4 border-black my-2 mx-2">
                     <div class="h3">Customers</div>
-                    <div  style="font-size: 6rem;">{{getNumberOfCustomers()}}</div>
+                    <div  style="font-size: 6rem;">{{nCostumers}}</div>
                 </div>
             </div>
             
             <div class="w-50 position-relative d-flex ">
                 <div class="interBox-bg w-100 flex-column text-center border border-4 rounded-4 border-black my-2 mx-2">
                     <div class="h3">Waiting Orders</div>
-                    <div  style="font-size: 6rem;">{{getWaitingOrders()}}</div>
+                    <div  style="font-size: 6rem;">{{waitingOrders}}</div>
                 </div>
             </div>
             
             <div class="w-50 position-relative d-flex ">
                 <div class="interBox-bg w-100 flex-column text-center border border-4 rounded-4 border-black my-2 mx-2">
                     <div class="h3">Prepared Orders</div>
-                    <div  style="font-size: 6rem;">{{getPreparedOrders()}}</div>
+                    <div  style="font-size: 6rem;">{{preparedOrders}}</div>
                 </div>
             </div>
             
@@ -42,7 +42,7 @@
 
             <div class="interBox-bg w-100 d-flex justify-content-between flex-column align-items-center border border-4 rounded-4 border-black my-2 mx-2">
                 <div class="h2">Dish of the day</div>
-                <img class="w-75" src="{{getMostOrderedDish()}}" alt="">
+                <img class="w-75" src="{{mostOrderedDish}}" alt="">
                 <h2 >{{mostOrdered}}</h2>
             </div>
         </div>
@@ -60,7 +60,7 @@
         <!-- da farlo con un ngFor e usare possibilmente le prime cinque pù ordinate-->
 
         <div class=" d-flex justify-content-around">
-            @for(dish of getFirstFiveOrderedDish(); track dish){
+            @for(dish of firstFiveOrderedDishes; track dish){
                 <div class="w-25 d-flex justify-content-center flex-column align-items-center" style="font-size: 1.5rem;">
                     <img class="w-75 h-75" src="{{findDish(dish)}}" alt="">
                     {{dish}}

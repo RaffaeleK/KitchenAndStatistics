@@ -30,19 +30,30 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   requestedOrders: Map<string, number> = new Map<string, number>();
 
   constructor(private statsService: StatsService, private auth: AuthService, private router: Router) { 
-    statsService.getTables().subscribe(r => this.tables = r)
-    statsService.getOrdersStats().subscribe(r => {this.orders = r.filter(r => r.category != "Beverages"); this.fillAndOrganiseOrdersByPeople()});
-    
+    this.callAPIs();
+  }
+
+  callAPIs(){
+    this.statsService.getTables().subscribe(r => {this.tables = r; this.updateConstumersAndTables()} )
+    this.statsService.getOrdersStats().subscribe(r => {this.orders = r.filter(r => r.category != "Beverages"); this.fillAndOrganiseOrdersByPeople(); this.updateData();});
+  }
+
+
+  updateConstumersAndTables(){
+    this.occupiedTables = this.getAllOccupietedTable();
+    this.nCostumers = this.getNumberOfCustomers();
+    console.log("aggiornamento clienti e tavoli");
+  }
+  updateData(){
+    this.fillAndOrganiseOrdersByPeople();
+    this.waitingOrders = this.getWaitingOrders();
+    this.preparedOrders = this.getPreparedOrders();
+    this.mostOrderedDish = this.getMostOrderedDish();
+    this.firstFiveOrderedDishes = this.getFirstFiveOrderedDish();
+    console.log("dentro");
   }
   ngOnInit(): void {
-    this.timer = setInterval(() => {
-      this.occupiedTables = this.getAllOccupietedTable();
-      this.nCostumers = this.getNumberOfCustomers();
-      this.waitingOrders = this.getWaitingOrders();
-      this.preparedOrders = this.getPreparedOrders();
-      this.mostOrderedDish = this.getMostOrderedDish();
-      this.firstFiveOrderedDishes = this.getFirstFiveOrderedDish();
-    }, 30000)
+    this.timer = setInterval(() => this.callAPIs(), 15000)
   }
   ngOnDestroy(): void {
      if (this.timer) {
@@ -114,19 +125,19 @@ export class StatisticsComponent implements OnInit, OnDestroy {
     return environment.apiImage + this.orders.find(o => o.name == name)!.image!;
   }
 
-  fillAndOrganiseOrdersByPeople(){   
+  fillAndOrganiseOrdersByPeople() {
+    this.requestedOrders.clear(); // <--- svuota la mappa prima di riempirla
 
     this.orders.forEach(order => {
       if (this.requestedOrders.has(order.name!)) {
         this.requestedOrders.set(order.name!, order.qty! + this.requestedOrders.get(order.name!)!);
       } else {
-        this.requestedOrders.set(order.name!, order.qty!)
+        this.requestedOrders.set(order.name!, order.qty!);
       }
     });
-    
-    //trovare un modo di spiegarlo
+
     const sortedArray = Array.from(this.requestedOrders.entries())
-    .sort((a, b) => b[1] - a[1]);
+      .sort((a, b) => b[1] - a[1]);
 
     this.requestedOrders = new Map<string, number>(sortedArray);
   }
