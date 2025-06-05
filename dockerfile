@@ -8,4 +8,5 @@ RUN npm run build
 # stage 2
 FROM nginx:alpine
 COPY --from=build /opt/app/dist/kitchen-and-statistics/browser /usr/share/nginx/html
+COPY ./nginx-custom.conf  /etc/nginx/conf.d/default.conf
 CMD exec nginx -g 'daemon off;'
