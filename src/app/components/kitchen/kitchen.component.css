@@ -1,3 +1,11 @@
 .margin{
   margin-top: 4.5rem;
 }
+
+.List{
+  min-width: 18em;
+  min-height: 14em;
+  max-height: 36em;
+  overflow-y: auto;
+  width: 100%;
+}
