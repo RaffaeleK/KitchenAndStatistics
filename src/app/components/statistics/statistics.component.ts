@@ -19,8 +19,8 @@ export class StatisticsComponent implements OnInit, OnDestroy {
 
   occupiedTables: number = 0;
   nCostumers: number = 0;
-  waitingOrders: number = 0;
-  preparedOrders: number = 0;
+  waitingDishes: number = 0;
+  preparedDishes: number = 0;
   mostOrderedDish: string = "";
   firstFiveOrderedDishes: string[] = [];
 
@@ -38,18 +38,18 @@ export class StatisticsComponent implements OnInit, OnDestroy {
     this.statsService.getOrdersStats().subscribe(r => {this.orders = r.filter(r => r.category != "Beverages"); this.fillAndOrganiseOrdersByPeople(); this.updateData();});
   }
 
-
   updateConstumersAndTables(){
     this.occupiedTables = this.getAllOccupietedTable();
     this.nCostumers = this.getNumberOfCustomers();
   }
+
   updateData(){
-    this.fillAndOrganiseOrdersByPeople();
-    this.waitingOrders = this.getWaitingOrders();
-    this.preparedOrders = this.getPreparedOrders();
+    this.waitingDishes = this.getWaitingDishes();
+    this.preparedDishes = this.getPreparedDishes();
     this.mostOrderedDish = this.getMostOrderedDish();
     this.firstFiveOrderedDishes = this.getFirstFiveOrderedDish();
   }
+
   ngOnInit(): void {
     this.timer = setInterval(() => this.callAPIs(), 15000)
   }
@@ -74,24 +74,24 @@ export class StatisticsComponent implements OnInit, OnDestroy {
     return numOfCust;
   }
 
-  getWaitingOrders(): number{
+  getWaitingDishes(): number{
     let waitingOrders = 0;
 
     this.orders.forEach( o =>{
       if(o.completionDate == null)
-        waitingOrders++;
+        waitingOrders += o.qty!;
     })
 
     return waitingOrders;
   }
 
   
-  getPreparedOrders(): number{
+  getPreparedDishes(): number{
     let preparedOrders = 0;
 
     this.orders.forEach( o =>{
       if(o.completionDate != null)
-        preparedOrders++;
+        preparedOrders += o.qty!;
     })
 
     return preparedOrders;
@@ -131,10 +131,8 @@ export class StatisticsComponent implements OnInit, OnDestroy {
       }
     });
 
-    const sortedArray = Array.from(this.requestedOrders.entries())
-      .sort((a, b) => b[1] - a[1]);
-
-    this.requestedOrders = new Map<string, number>(sortedArray);
+    //ci permette di ordinare la map in base al numero di quantità ordinata
+    this.requestedOrders  = new Map<string, number> (Array.from(this.requestedOrders.entries()).sort((a, b) => b[1] - a[1]))
   }
 
   Logout():void {
