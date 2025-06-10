@@ -10,7 +10,7 @@
 
 <div class="d-flex justify-content-start">
     <div class="d-flex justify-content-start flex-wrap w-75 mx-2 List">
-        @for (order of orders; track order) {
+        @for (order of orderGroups; track order) {
             <app-order [order]="order"></app-order>
         }
     </div>
