@@ -1,10 +1,9 @@
 <app-header></app-header>
 <div class="d-flex justify-content-end margin">
-    <div class="d-flex my-3 mx-2 w-25">
-        <select class="form-select" [(ngModel)]="orderTypeFilter" (change)="applyFilter()">
+    <div class="my-3 mx-3 w-25">
+        <select class="form-select w-100" [(ngModel)]="orderTypeFilter" (change)="applyFilter()">
             <option *ngFor="let type of types" [ngValue]="type">{{type.name}}</option>
-        </select> 
-        
+        </select>
     </div>
 </div>
 
@@ -14,8 +13,8 @@
             <app-order [order]="order"></app-order>
         }
     </div>
-    <div class=" justify-content-start mx-2">
-        <div class="card w-25 mx-2 List">
+    <div class="mx-3 w-25">
+        <div class="card List w-100">
             <div class="mx-2">
                 <ul>
                   <li *ngFor="let entry of getSummary() | keyvalue">
