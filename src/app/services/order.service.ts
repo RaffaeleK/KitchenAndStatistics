@@ -33,8 +33,10 @@ export class OrderService {
    
   }
 
-  orderDone(id: number, orderId: number): Observable<any> {
-    return this.http.post(environment.apiKitchen + '/kitchen/' + id + '/order', [{ id: orderId }]).pipe(
+  orderDone(id: number, orderIds: number[]): Observable<any> {
+    const body = orderIds.map(orderId => ({ id: orderId }));
+    console.log(body);
+    return this.http.post(environment.apiKitchen + '/kitchen/' + id + '/order', body).pipe(
       map(result => {
         this.reloaded.set(true);
         return result;

@@ -23,8 +23,8 @@
     <hr class="my-2 border-primary">
     <div class="card-body d-flex flex-column">
         <h4>Table: {{order.tableId}}</h4> 
-        <h5 class="card-title">Product name: {{order.name}}</h5>
-        <h5 class="card-title">Quantity: {{order.qty}}</h5>
+        <h5 class="card-title">Product name: <br><p *ngFor="let i of [].constructor(order.names?.length || 0); let idx = index">{{ order.names![idx] }} x{{order.qtys![idx]}}</p></h5>
+        <!--<h5 class="card-title">Quantity: {{order.qty}}</h5>-->
         <div class="mt-auto d-flex">
             <a class="btn btn-success" (click)="signAsCompleted()">Sign as completed <i class="bi bi-check2"></i></a>
         </div>

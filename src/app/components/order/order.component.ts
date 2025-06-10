@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { OrderService } from '../../services/order.service';
-import {RecivedOrder } from '../../model/order';
+import { OrderGroup } from '../../model/order';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -11,21 +11,17 @@ import { CommonModule } from '@angular/common';
 })
 export class OrderComponent {
 
-  @Input() order!: RecivedOrder;  
-  offset = new Date().getTimezoneOffset();
+  @Input() order!: OrderGroup;
 
   constructor(private orderService : OrderService)
   {
-    if(this.order)
-    {
-      //this.actualDate = this.order.orderDate!.getTime() + new Date().getTimezoneOffset()
-    }
+    
   }
 
   signAsCompleted()
   {
     this.order.completionDate = new Date();
-    this.orderService.orderDone(this.order.orderType!.id!, this.order.id!).subscribe()
+    this.orderService.orderDone(this.order.orderType!.id!, this.order.ids!).subscribe()
   }
 
   isOrderWarning(): boolean {

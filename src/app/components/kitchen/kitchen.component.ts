@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit, effect } from '@angular/core';
-import {orderType, RecivedOrder } from '../../model/order';
+import {OrderGroup, orderType, RecivedOrder } from '../../model/order';
 import { OrderService } from '../../services/order.service';
 import { OrderComponent } from '../order/order.component';
 import { HeaderComponent } from '../header/header.component';
@@ -16,6 +16,7 @@ export class KitchenComponent implements OnInit, OnDestroy{
 
   //const INITIALID = 1
   orders? : RecivedOrder[]
+  orderGroups? : OrderGroup[]
   orderTypeFilter? : orderType
   types? : orderType[]
   private ordersTimer: any;
@@ -37,6 +38,7 @@ export class KitchenComponent implements OnInit, OnDestroy{
     });
 
   }
+
   ngOnInit(): void {
     this.ordersTimer = setInterval(() =>{this.applyFilter()}, 10000);
   }
@@ -50,7 +52,7 @@ export class KitchenComponent implements OnInit, OnDestroy{
   applyFilter()
   {
     this.orderService.getOrdersById(this.orderTypeFilter!.id!).subscribe({
-      next: r => this.orders = r,
+      next: r => {this.orders = r; this.orderGroups = this.buildOrderGroups(r)},
       error: r => this.orders = []
     });
   }
@@ -70,5 +72,60 @@ export class KitchenComponent implements OnInit, OnDestroy{
     }
 
     return summary
+  }
+
+  getOrdersByTime(orders: RecivedOrder[]) : RecivedOrder[][]
+  {
+    // Usa una mappa per raggruppare per tavolo, ora e minuto
+    const groups: { [key: string]: RecivedOrder[] } = {};
+
+    for (const order of orders) {
+      const date = new Date(order.orderDate!);
+      // Chiave: tavolo_ora_minuto
+      const key = `${order.tableId}_${date.getHours()}_${date.getMinutes()}`;
+
+      if (!groups[key]) {
+        groups[key] = [];
+      }
+      groups[key].push(order);
+    }
+
+    // Trasforma la mappa in un array di array
+    return Object.values(groups);
+  }
+
+  buildOrderGroups(orders: RecivedOrder[]) : OrderGroup[]
+  {
+    var orderGroups : OrderGroup[] = []
+    var ordersByTime = this.getOrdersByTime(orders)
+    
+    for(let i = 0; i < ordersByTime.length; i++)
+    {
+      var currentOrder = ordersByTime[i][0] as OrderGroup
+      currentOrder.names = [];
+      currentOrder.ids = [];
+      currentOrder.qtys = [];
+
+      for(let j = 0; j < ordersByTime[i].length; j++)
+      {
+        if(currentOrder.names?.includes(ordersByTime[i][j].name!))
+        {
+          console.log(currentOrder.names.indexOf(ordersByTime[i][j].name!))
+          console.log(currentOrder.qtys?.length)
+          currentOrder.qtys![currentOrder.names.indexOf(ordersByTime[i][j].name!)] += ordersByTime[i][j].qty!
+        }
+        else
+        {
+          currentOrder.names?.push(ordersByTime[i][j].name!)
+          currentOrder.qtys?.push(ordersByTime[i][j].qty!)
+        }
+
+        currentOrder.ids?.push(ordersByTime[i][j].id!)
+      }
+
+      orderGroups?.push(currentOrder)
+    }
+
+    return orderGroups
   }
 }

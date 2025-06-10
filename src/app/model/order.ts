@@ -22,6 +22,13 @@ export class RecivedOrder extends Order
     tableId?: number
 }
 
+export class OrderGroup extends RecivedOrder
+{
+    ids? : number[] = []
+    names? : string[] = []
+    qtys? : number[] = []
+}
+
 export class OrderStats extends Order
 {
     image?: string
