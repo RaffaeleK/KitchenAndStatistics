@@ -1,4 +1,4 @@
-<div class="card mx-1 my-2" style="width: 17rem; min-height: 18em;">
+<div class="card mx-1">
     @if(isOrderDanger())
     {
         <div class="d-flex justify-content-evenly py-2 bg-danger">
@@ -20,13 +20,21 @@
             <p>Order Time: {{getOrderTime(order.orderDate!)}}</p>
         </div>
     }
-    <hr class="my-2 border-primary">
-    <div class="card-body d-flex flex-column">
-        <h4>Table: {{order.tableId}}</h4> 
-        <h5 class="card-title">Product name: <br><p *ngFor="let i of [].constructor(order.names?.length || 0); let idx = index">{{ order.names![idx] }} x{{order.qtys![idx]}}</p></h5>
-        <!--<h5 class="card-title">Quantity: {{order.qty}}</h5>-->
-        <div class="mt-auto d-flex">
-            <a class="btn btn-success" (click)="signAsCompleted()">Sign as completed <i class="bi bi-check2"></i></a>
+    
+    <!-- Card container sotto -->
+    <div class="mx-1 my-2 List" style="width: 17rem; min-height: 18em;">
+        <div class="card-body d-flex flex-column">
+            <h4>Table: {{order.tableId}}</h4> 
+            <h5 class="card-title">
+                Product name:
+                <br>
+                <p *ngFor="let i of [].constructor(order.names?.length || 0); let idx = index">
+                    {{ order.names![idx] }} x{{order.qtys![idx]}}
+                </p>
+            </h5>
         </div>
+    </div>
+    <div class="mt-auto d-flex justify-content-center my-1">
+        <a class="btn btn-success" (click)="signAsCompleted()">Sign as completed <i class="bi bi-check2"></i></a>
     </div>
 </div>

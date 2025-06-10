@@ -1,0 +1,6 @@
+.List{
+  min-height: 14em;
+  max-height: 15em;
+  overflow-y: auto;
+  width: 100%;
+}
