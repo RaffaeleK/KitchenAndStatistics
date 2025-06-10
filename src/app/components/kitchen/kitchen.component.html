@@ -1,5 +1,6 @@
 <app-header></app-header>
 <div class="d-flex justify-content-end margin">
+    <div class="w-75"></div>
     <div class="my-3 mx-3 w-25">
         <select class="form-select w-100" [(ngModel)]="orderTypeFilter" (change)="applyFilter()">
             <option *ngFor="let type of types" [ngValue]="type">{{type.name}}</option>
@@ -9,14 +10,14 @@
 
 @if (orders?.length! > 0)
 {
-    <div class="d-flex justify-content-start">
-        <div class="d-flex justify-content-start flex-wrap w-75 mx-2 List">
+    <div class="d-flex justify-content-between mx-2">
+        <div class="d-flex justify-content-start flex-wrap w-75 List">
             @for (order of orderGroups; track order) {
                 <app-order [order]="order"></app-order>
             }
         </div>
-        <div class=" justify-content-start mx-2">
-            <div class="card w-25 mx-2 List">
+        <div class="w-25 mx-2">
+            <div class="card w-100 List">
                 <div class="mx-2">
                     <ul>
                       <li *ngFor="let entry of getSummary() | keyvalue">
