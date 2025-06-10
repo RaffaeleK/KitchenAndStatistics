@@ -32,4 +32,5 @@ export class OrderGroup extends RecivedOrder
 export class OrderStats extends Order
 {
     image?: string
+    category?: string
 }

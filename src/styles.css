@@ -2,3 +2,12 @@
 .bluMaggioli{
     background-color: #0d6efd;
 }
+
+.logout{
+    font-size: 1.1rem;
+}
+
+.title{
+    letter-spacing: 2px; 
+    font-family: 'Segoe UI', Arial, sans-serif;
+}

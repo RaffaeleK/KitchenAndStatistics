@@ -34,6 +34,7 @@ export class StatsService {
             productId: item.productId,
             name: item.name,
             qty: item.qty,
+            category: item.category,
             price: item.price,
             orderDate: <Date>(item.orderDate),
             completionDate: item.completionDate ? <Date>(item.completionDate) : null
