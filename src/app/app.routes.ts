@@ -4,10 +4,11 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuardK } from './components/guards/authK.guards';
 import { AuthGuardS } from './components/guards/authS.guards';
+import { NotfoundComponent } from './components/notfound/notfound.component';
 
 export const routes: Routes = [
     {path: '', component:KitchenComponent,canActivate:[AuthGuardK]},
     {path: 'login', component:LoginComponent},
     {path: 'stats', component: StatisticsComponent,canActivate:[AuthGuardS]},
-    {path: '**', component: LoginComponent}
+    {path: '**', component: NotfoundComponent}
 ];
