@@ -10,7 +10,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AuthService {
 
-  private jwtHelper = new JwtHelperService();
+  private jwtHelper = new JwtHelperService();//serve per decodificare il token jwt e verificare se è scaduto
 
   constructor(private http : HttpClient) { }
 
@@ -47,7 +47,7 @@ export class AuthService {
   {
     var token = localStorage.getItem('token');
     if( !token ) return false;
-    return !this.jwtHelper.isTokenExpired(token);
+    return !this.jwtHelper.isTokenExpired(token); //guarda se il token è scaduto
   }
 
   getUniqueNameFromToken()
@@ -55,7 +55,7 @@ export class AuthService {
     var token = localStorage.getItem('token');
     if( !token || !this.isLogged() ) return 0;
 
-    const decodedToken = this.jwtHelper.decodeToken(token);
+    const decodedToken = this.jwtHelper.decodeToken(token); // decodifica il token jwt
     if( decodedToken && decodedToken.unique_name ) return decodedToken.unique_name;
     return 0;
   }
