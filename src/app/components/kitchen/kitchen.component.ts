@@ -110,8 +110,6 @@ export class KitchenComponent implements OnInit, OnDestroy{
       {
         if(currentOrder.names?.includes(ordersByTime[i][j].name!))
         {
-          console.log(currentOrder.names.indexOf(ordersByTime[i][j].name!))
-          console.log(currentOrder.qtys?.length)
           currentOrder.qtys![currentOrder.names.indexOf(ordersByTime[i][j].name!)] += ordersByTime[i][j].qty!
         }
         else

@@ -1,59 +1,35 @@
-# KitchenAndStatistics
+# Introduzione all'applicazione
+> ## Interfaccia Login
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.13.
+![login](MDsrc/login.png)
 
-## Development server
+> ### Login
 
-To start a local development server, run:
+All'avvio dell'applicazione viene presentata automaticamente la schermata del login. Che permette l'accesso all'applicazione solo dopo l'autenticazione
 
-```bash
-ng serve
-```
+---
+> ## Interfaccia Home
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+![interfaccia](MDsrc/page.png)
 
-## Code scaffolding
+> ### Header
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+nell' header è presente l'orario corrente, aggiornato in tempo reale e il pulsante di logout.
 
-```bash
-ng generate component component-name
-```
+> ### Ordini
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+nella parte a sinistra sono elencati gli ordini, in ogni ordine sono elencati i prodotti ordinati e le rispettive quantità.
+**Gli ordini effettuati dallo stesso tavolo nello stesso minuto vengono raggruppati.**
+In basso è presente il pulsante "Sign as completed" che contrassegna come completato l'ordine (o gli ordini in caso siano stati raggruppati).
 
-```bash
-ng generate --help
-```
+> ### Sezioni
+In alto a destra è presente un menu a tendina che contiene le sezioni della cucina, in questo caso:
+- Cucina
+- Dolci
+- Bevande
 
-## Building
+Nel caso all'interno dell'API venissero aggiunte nuove sezioni, il menu a tendina aggiornerebbe autonomamente i suoi contenuti.
 
-To build the project run:
+> ### Elenco sommativo
 
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+per comodità sulla destra, sotto al menu a tendina abbiamo posizionato un elenco di tutto il cibo ordinato e le rispettive quantità in ordine alfabetico in modo da dare una visione più generale dei cibi da preparare.
