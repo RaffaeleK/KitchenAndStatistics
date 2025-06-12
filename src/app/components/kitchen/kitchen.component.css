@@ -4,8 +4,9 @@
 
 .List{
   min-width: 18em;
-  min-height: 14rem;
-  max-height: 36em;
+  min-height: 14em;
+  max-height: 80vh;   
   overflow-y: auto;
   width: 100%;
+  box-sizing: border-box;
 }
