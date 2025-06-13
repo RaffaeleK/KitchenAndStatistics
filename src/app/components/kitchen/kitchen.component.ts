@@ -40,7 +40,7 @@ export class KitchenComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void {
-    this.ordersTimer = setInterval(() =>{this.applyFilter()}, 10000);
+    this.ordersTimer = setInterval(() => {this.applyFilter()}, 10000);
   }
 
   ngOnDestroy(): void {

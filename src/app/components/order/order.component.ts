@@ -37,15 +37,7 @@ export class OrderComponent {
   {
     if (!this.order.orderDate) return 0;
 
-    let orderDate: Date;
-
-    if (typeof this.order.orderDate === 'string') {
-      const orderDateStr = this.order.orderDate as string;
-      const isoString = orderDateStr.endsWith('Z') ? orderDateStr : orderDateStr + 'Z';
-      orderDate = new Date(isoString);
-    } else {
-      orderDate = this.order.orderDate;
-    }
+    let orderDate: Date = this.getDate(this.order.orderDate!)
 
     return new Date().getTime() - orderDate.getTime();
   }
@@ -53,18 +45,27 @@ export class OrderComponent {
   getOrderTime(orderDate: string | Date): string {
     if (!orderDate) return '';
     
-    let date: Date;
-    if (typeof orderDate === 'string') {
-      const isoString = orderDate.endsWith('Z') ? orderDate : orderDate + 'Z';
-      date = new Date(isoString);
-    } else {
-      date = orderDate;
-    }
+    let date: Date = this.getDate(orderDate)
+    
     return date.toLocaleTimeString('it-IT', {
       hour: '2-digit',
       minute: '2-digit',
       hour12: false,
       timeZone: 'Europe/Rome'
     });
+  }
+
+  getDate(orderDate: string | Date): Date
+  {
+    let date: Date;
+
+    if (typeof orderDate === 'string') {
+      const isoString = orderDate.endsWith('Z') ? orderDate : orderDate + 'Z';
+      date = new Date(isoString);
+    } else {
+      date = orderDate;
+    }
+
+    return date
   }
 }
